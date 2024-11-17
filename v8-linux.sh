@@ -47,8 +47,5 @@ v8_use_external_startup_data = false
 symbol_level = 0
 '
 ninja -C out.gn/x64.release -t clean
+ninja -C out.gn/x64.release d8_monolith
 ninja -C out.gn/x64.release v8_monolith
-ninja -C out.gn/x64.release d8
-
-rm -rf ./out.gn/x64.release/obj
-rm -rf ./out.gn/x64.release/gen
