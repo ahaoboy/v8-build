@@ -50,5 +50,5 @@ ninja -C out.gn/x64.release -t clean
 ninja -C out.gn/x64.release v8_monolith
 ninja -C out.gn/x64.release d8
 
-rm -rm ./out.gn/obj
-rm -rm ./out.gn/gen
+rm -rf ./out.gn/x64.release/obj
+rm -rf ./out.gn/x64.release/gen
