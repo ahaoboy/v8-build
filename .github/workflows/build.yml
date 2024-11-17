@@ -1,4 +1,4 @@
-name: Build V8
+name: build
 
 permissions:
   contents: write
@@ -15,26 +15,25 @@ on:
 
 jobs:
   build-x86_64-unknown-linux-gnu:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
       - name: build
         run: |
           sh ./v8-linux.sh
 
-          rm -rf ./v8/v8/out.gn/x64.release/obj
-          rm -rf ./v8/v8/out.gn/x64.release/gen
-          cd ./v8/v8/out.gn
+          echo ==============build v8==============
+
+          rm -rf ~/v8/v8/out.gn/x64.release/obj
+          rm -rf ~/v8/v8/out.gn/x64.release/gen
+          cd ~/v8/v8/out.gn
           tar -czf v8-x86_64-unknown-linux-gnu.tar.gz ./x64.release
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: v8-x86_64-unknown-linux-gnu
-          path: ./v8/v8/out.gn/v8-x86_64-unknown-linux-gnu.tar.gz
+          path: ~/v8/v8/out.gn/v8-x86_64-unknown-linux-gnu.tar.gz
   build-x86_64-apple-darwin:
     if: false
     runs-on: macos-13
