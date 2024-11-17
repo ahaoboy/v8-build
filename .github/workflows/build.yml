@@ -27,13 +27,13 @@ jobs:
 
           rm -rf ~/v8/v8/out.gn/x64.release/obj
           rm -rf ~/v8/v8/out.gn/x64.release/gen
-          cd ~/v8/v8/out.gn
-          tar -czf v8-x86_64-unknown-linux-gnu.tar.gz ./x64.release
+          cd ~/v8/v8/out.gn/x64.release
+          tar -czf v8-x86_64-unknown-linux-gnu.tar.gz .
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: v8-x86_64-unknown-linux-gnu
-          path: ~/v8/v8/out.gn/v8-x86_64-unknown-linux-gnu.tar.gz
+          path: ~/v8/v8/out.gn/x64.release/v8-x86_64-unknown-linux-gnu.tar.gz
   build-x86_64-apple-darwin:
     if: false
     runs-on: macos-13
@@ -49,13 +49,13 @@ jobs:
 
           rm -rf ./v8/v8/out.gn/x64.release/obj
           rm -rf ./v8/v8/out.gn/x64.release/gen
-          cd ./v8/v8/out.gn
-          tar -czf v8-x86_64-apple-darwin.tar.gz ./x64.release
+          cd ./v8/v8/out.gn/x64.release
+          tar -czf v8-x86_64-apple-darwin.tar.gz .
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: v8-x86_64-apple-darwin
-          path: ./v8/v8/out.gn/v8-x86_64-apple-darwin.tar.gz
+          path: ./v8/v8/out.gn/x64.release/v8-x86_64-apple-darwin.tar.gz
 
   build-x86_64-pc-windows-msvc:
     if: false
@@ -74,13 +74,13 @@ jobs:
           rmdir .\v8\v8\out.gn\x64.release\obj
           rmdir .\v8\v8\out.gn\x64.release\gen
 
-          cd .\v8\v8\out.gn
-          tar -czf v8-x86_64-pc-windows-msvc.tar.gz .\x64.release
+          cd .\v8\v8\out.gn\x64.release
+          tar -czf v8-x86_64-pc-windows-msvc.tar.gz .
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: v8-x86_64-pc-windows-msvc
-          path: ./v8/v8/out.gn/v8-x86_64-pc-windows-msvc.tar.gz
+          path: ./v8/v8/out.gn/x64.release/v8-x86_64-pc-windows-msvc.tar.gz
 
   build:
     needs:
