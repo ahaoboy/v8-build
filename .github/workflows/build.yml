@@ -19,9 +19,22 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+      - name: install
+        run: |
+          gcc --version
+          g++ --version
+          clang --version
+          sudo apt update
+          sudo apt install gcc-14 g++-14 -y
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 14
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 14
+
       - name: build
         run: |
-          sh ./v8-linux.sh
+          gcc --version
+          g++ --version
+          clang --version
+          sudo sh ./v8-linux.sh
 
       - name: tar
         run: |
@@ -31,7 +44,7 @@ jobs:
           tar -cJf v8-x86_64-unknown-linux-gnu.tar.xz -C x64.release .
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: v8-x86_64-unknown-linux-gnu
           path: ~/v8/v8/out.gn/v8-x86_64-unknown-linux-gnu.tar.xz
@@ -59,7 +72,7 @@ jobs:
           cd ./v8/v8/out.gn
           tar -cJf v8-x86_64-apple-darwin.tar.xz -C x64.release .
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: v8-x86_64-apple-darwin
           path: ./v8/v8/out.gn/v8-x86_64-apple-darwin.tar.xz
@@ -84,7 +97,7 @@ jobs:
           cd .\v8\v8\out.gn
           tar -cJf v8-x86_64-pc-windows-msvc.tar.xz -C x64.release .
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: v8-x86_64-pc-windows-msvc
           path: ./v8/v8/out.gn/v8-x86_64-pc-windows-msvc.tar.xz
