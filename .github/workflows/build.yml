@@ -34,7 +34,7 @@ jobs:
           gcc --version
           g++ --version
           clang --version
-          sudo sh ./v8-linux.sh
+          sh ./v8-linux.sh
 
       - name: tar
         run: |
