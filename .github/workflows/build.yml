@@ -67,15 +67,15 @@ jobs:
         run: |
           sh ./v8-macos.sh
 
-          rm -rf ./v8/v8/out.gn/x64.release/obj
-          rm -rf ./v8/v8/out.gn/x64.release/gen
-          cd ./v8/v8/out.gn
+          rm -rf ~/v8/v8/out.gn/x64.release/obj
+          rm -rf ~/v8/v8/out.gn/x64.release/gen
+          cd ~/v8/v8/out.gn
           tar -cJf v8-x86_64-apple-darwin.tar.xz -C x64.release .
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: v8-x86_64-apple-darwin
-          path: ./v8/v8/out.gn/v8-x86_64-apple-darwin.tar.xz
+          path: ~/v8/v8/out.gn/v8-x86_64-apple-darwin.tar.xz
   build-aarch64-apple-darwin:
     if: true
     runs-on: macos-14
@@ -89,15 +89,15 @@ jobs:
         run: |
           sh ./v8-macos.sh
 
-          rm -rf ./v8/v8/out.gn/x64.release/obj
-          rm -rf ./v8/v8/out.gn/x64.release/gen
-          cd ./v8/v8/out.gn
+          rm -rf ~/v8/v8/out.gn/x64.release/obj
+          rm -rf ~/v8/v8/out.gn/x64.release/gen
+          cd ~/v8/v8/out.gn
           tar -cJf v8-aarch64-apple-darwin.tar.xz -C x64.release .
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: v8-aarch64-apple-darwin
-          path: ./v8/v8/out.gn/v8-aarch64-apple-darwin.tar.xz
+          path: ~/v8/v8/out.gn/v8-aarch64-apple-darwin.tar.xz
 
   build-x86_64-pc-windows-msvc:
     if: false
@@ -122,7 +122,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: v8-x86_64-pc-windows-msvc
-          path: ./v8/v8/out.gn/v8-x86_64-pc-windows-msvc.tar.xz
+          path: ~/v8/v8/out.gn/v8-x86_64-pc-windows-msvc.tar.xz
 
   build:
     needs: [

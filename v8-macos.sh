@@ -1,4 +1,4 @@
-VERSION=$1
+# VERSION=$1
 
 git config --global user.name "V8 macOS Builder"
 git config --global user.email "v8.macos.builder@localhost"
@@ -21,7 +21,7 @@ echo "=====[ Fetching V8 ]====="
 fetch v8
 echo "target_os = ['mac']" >> .gclient
 cd ~/v8/v8
-git checkout $VERSION
+# git checkout $VERSION
 gclient sync
 
 
