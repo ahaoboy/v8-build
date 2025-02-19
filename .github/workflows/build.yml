@@ -55,7 +55,7 @@ jobs:
           artifacts: ~/v8/v8/out.gn/v8-x86_64-unknown-linux-gnu.tar.xz,dist-manifest.json
 
   build-x86_64-apple-darwin:
-    if: false
+    if: true
     runs-on: macos-13
     steps:
       - name: Checkout Code
@@ -65,7 +65,7 @@ jobs:
           python-version: "3.11"
       - name: build
         run: |
-          sh ./v8-macos.sh
+          sudo sh ./v8-macos.sh
 
           rm -rf ./v8/v8/out.gn/x64.release/obj
           rm -rf ./v8/v8/out.gn/x64.release/gen
@@ -76,6 +76,28 @@ jobs:
         with:
           name: v8-x86_64-apple-darwin
           path: ./v8/v8/out.gn/v8-x86_64-apple-darwin.tar.xz
+  build-aarch64-apple-darwin:
+    if: true
+    runs-on: macos-14
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: build
+        run: |
+          sudo sh ./v8-macos.sh
+
+          rm -rf ./v8/v8/out.gn/x64.release/obj
+          rm -rf ./v8/v8/out.gn/x64.release/gen
+          cd ./v8/v8/out.gn
+          tar -cJf v8-aarch64-apple-darwin.tar.xz -C x64.release .
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: v8-aarch64-apple-darwin
+          path: ./v8/v8/out.gn/v8-aarch64-apple-darwin.tar.xz
 
   build-x86_64-pc-windows-msvc:
     if: false
