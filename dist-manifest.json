@@ -6,49 +6,33 @@
       ],
       "assets": [
         {
-          "name": "d8",
-          "path": "d8",
-          "kind": "executable"
-        },
+          "name": "v8",
+          "path": ".",
+          "kind": "executable-dir"
+        }
+      ]
+    },
+    "v8-aarch64-apple-darwin.tar.xz": {
+      "target_triples": [
+        "aarch64-apple-darwin"
+      ],
+      "assets": [
         {
-          "name": "libv8.so",
-          "path": "libv8.so",
-          "kind": "c_dynamic_library"
-        },
+          "name": "v8",
+          "path": ".",
+          "kind": "executable-dir"
+        }
+      ]
+    },
+    "v8-x86_64-apple-darwin.tar.xz": {
+      "target_triples": [
+        "x86_64-apple-darwin"
+      ],
+      "assets": [
         {
-          "name": "libv8_libbase.so",
-          "path": "libv8_libbase.so",
-          "kind": "c_dynamic_library"
-        },
-        {
-          "name": "libv8_libplatform.so",
-          "path": "libv8_libplatform.so",
-          "kind": "c_dynamic_library"
-        },
-        {
-          "name": "libicuuc.so",
-          "path": "libicuuc.so",
-          "kind": "c_dynamic_library"
-        },
-        {
-          "name": "libthird_party_abseil-cpp_absl.so",
-          "path": "libthird_party_abseil-cpp_absl.so",
-          "kind": "c_dynamic_library"
-        },
-        {
-          "name": "libthird_party_icu_icui18n.so",
-          "path": "libthird_party_icu_icui18n.so",
-          "kind": "c_dynamic_library"
-        },
-        {
-          "name": "libchrome_zlib.so",
-          "path": "libchrome_zlib.so",
-          "kind": "c_dynamic_library"
-        },
-        {
-          "name": "libv8_libplatform.so",
-          "path": "libv8_libplatform.so",
-          "kind": "c_dynamic_library"
+          "name": "v8",
+          "path": ".",
+          "kind": "executable-dir"
         }
       ]
     }
