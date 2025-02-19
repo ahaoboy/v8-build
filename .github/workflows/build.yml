@@ -65,12 +65,14 @@ jobs:
           python-version: "3.11"
       - name: build
         run: |
+          brew install gnu-tar
           sh ./v8-macos.sh
-
+      - name: tar
+        run: |
           rm -rf ~/v8/v8/out.gn/x64.release/obj
           rm -rf ~/v8/v8/out.gn/x64.release/gen
-          cd ~/v8/v8/out.gn/x64.release
-          tar -cJf v8-x86_64-apple-darwin.tar.xz -C GNUSparseFile.0 .
+          cd ~/v8/v8/out.gn
+          gtar -cJf v8-x86_64-apple-darwin.tar.xz -C x64.release .
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -87,12 +89,14 @@ jobs:
           python-version: "3.11"
       - name: build
         run: |
+          brew install gnu-tar
           sh ./v8-macos.sh
-
+      - name: tar
+        run: |
           rm -rf ~/v8/v8/out.gn/x64.release/obj
           rm -rf ~/v8/v8/out.gn/x64.release/gen
-          cd ~/v8/v8/out.gn/x64.release
-          tar -cJf v8-aarch64-apple-darwin.tar.xz -C GNUSparseFile.0 .
+          cd ~/v8/v8/out.gn
+          gtar -cJf v8-aarch64-apple-darwin.tar.xz -C x64.release .
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
