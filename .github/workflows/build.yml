@@ -95,6 +95,7 @@ jobs:
         run: |
           rm -rf ~/v8/v8/out.gn/x64.release/obj
           rm -rf ~/v8/v8/out.gn/x64.release/gen
+          rm -rf ~/v8/v8/out.gn/x64.release/clang_arm64_v8_x64
           cd ~/v8/v8/out.gn
           gtar -cJf v8-aarch64-apple-darwin.tar.xz -C x64.release .
       - name: Upload Build Artifacts
