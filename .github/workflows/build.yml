@@ -153,13 +153,21 @@ jobs:
                   Write-Output "Failed to download $($target.name): $_"
               }
           }
-      - name: Upload Build Artifacts
+      - name: Upload x86_64-pc-windows-msvc
         uses: actions/upload-artifact@v4
         with:
           name: v8-x86_64-pc-windows-msvc
-          # path: ~/v8/v8/out.gn/v8-x86_64-pc-windows-msvc.tar.xz
           path: v8-x86_64-pc-windows-msvc.zip
-
+      - name: Upload x86_64-apple-darwin
+        uses: actions/upload-artifact@v4
+        with:
+          name: v8-x86_64-apple-darwin
+          path: v8-x86_64-apple-darwin.zip
+      - name: Upload aarch64-apple-darwin
+        uses: actions/upload-artifact@v4
+        with:
+          name: v8-aarch64-apple-darwin
+          path: v8-aarch64-apple-darwin.zip
   build:
     needs: [
       "build-x86_64-unknown-linux-gnu",
