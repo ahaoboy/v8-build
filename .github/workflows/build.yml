@@ -55,7 +55,7 @@ jobs:
       #     artifacts: ~/v8/v8/out.gn/v8-x86_64-unknown-linux-gnu.tar.xz,dist-manifest.json
 
   build-x86_64-apple-darwin:
-    if: true
+    if: false
     runs-on: macos-13
     steps:
       - name: Checkout Code
@@ -79,7 +79,7 @@ jobs:
           name: v8-x86_64-apple-darwin
           path: ~/v8/v8/out.gn/v8-x86_64-apple-darwin.tar.xz
   build-aarch64-apple-darwin:
-    if: true
+    if: false
     runs-on: macos-14
     steps:
       - name: Checkout Code
@@ -129,6 +129,30 @@ jobs:
           Write-Output $version
           Invoke-WebRequest "https://storage.googleapis.com/chromium-v8/official/canary/v8-win64-rel-${version}.zip" -OutFile "v8-x86_64-pc-windows-msvc.zip"
 
+
+          # Fetch the latest V8 Canary version from the Windows JSON endpoint
+          $version = (Invoke-RestMethod "https://storage.googleapis.com/chromium-v8/official/canary/v8-win64-rel-latest.json").version
+
+          Write-Output "V8 Canary version: $version"
+
+          # Define download targets with platform-specific URLs and output filenames
+          $targets = @(
+              @{ name = "winx64"; url = "https://storage.googleapis.com/chromium-v8/official/canary/v8-win64-rel-$version.zip"; outfile = "v8-x86_64-pc-windows-msvc.zip" },
+              @{ name = "macos-x64"; url = "https://storage.googleapis.com/chromium-v8/official/canary/v8-mac64-rel-$version.zip"; outfile = "v8-x86_64-apple-darwin.zip" },
+              @{ name = "macos-arm64"; url = "https://storage.googleapis.com/chromium-v8/official/canary/v8-mac-arm64-rel-$version.zip"; outfile = "v8-aarch64-apple-darwin.zip" },
+              # @{ name = "linux64"; url = "https://storage.googleapis.com/chromium-v8/official/canary/v8-linux64-rel-$version.zip"; outfile = "v8-x86_64-pc-linux.zip" }
+          )
+
+          # Loop through each target and download the file
+          foreach ($target in $targets) {
+              Write-Output "Downloading $($target.name) ..."
+              try {
+                  Invoke-WebRequest -Uri $target.url -OutFile $target.outfile -ErrorAction Stop
+                  Write-Output "Saved to $($target.outfile)"
+              } catch {
+                  Write-Output "Failed to download $($target.name): $_"
+              }
+          }
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -140,8 +164,8 @@ jobs:
     needs: [
       "build-x86_64-unknown-linux-gnu",
       "build-x86_64-pc-windows-msvc",
-      "build-x86_64-apple-darwin",
-      "build-aarch64-apple-darwin",
+      # "build-x86_64-apple-darwin",
+      # "build-aarch64-apple-darwin",
     ]
     runs-on: ubuntu-24.04
     if: startsWith(github.ref, 'refs/tags/')
@@ -155,10 +179,16 @@ jobs:
           merge-multiple: true
 
       - name: release
-        if: startsWith(github.ref, 'refs/tags/')
+        # if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:
           artifacts: "v8/*"
+          allowUpdates: true
+          tag: "nightly"
+          name: "nightly"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit: main
+          replacesArtifacts: true
   test-release:
     if: startsWith(github.ref, 'refs/tags/')
     needs: ["build"]
