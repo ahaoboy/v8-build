@@ -139,7 +139,7 @@ jobs:
           $targets = @(
               @{ name = "winx64"; url = "https://storage.googleapis.com/chromium-v8/official/canary/v8-win64-rel-$version.zip"; outfile = "v8-x86_64-pc-windows-msvc.zip" },
               @{ name = "macos-x64"; url = "https://storage.googleapis.com/chromium-v8/official/canary/v8-mac64-rel-$version.zip"; outfile = "v8-x86_64-apple-darwin.zip" },
-              @{ name = "macos-arm64"; url = "https://storage.googleapis.com/chromium-v8/official/canary/v8-mac-arm64-rel-$version.zip"; outfile = "v8-aarch64-apple-darwin.zip" },
+              @{ name = "macos-arm64"; url = "https://storage.googleapis.com/chromium-v8/official/canary/v8-mac-arm64-rel-$version.zip"; outfile = "v8-aarch64-apple-darwin.zip" }
               # @{ name = "linux64"; url = "https://storage.googleapis.com/chromium-v8/official/canary/v8-linux64-rel-$version.zip"; outfile = "v8-x86_64-pc-linux.zip" }
           )
 
