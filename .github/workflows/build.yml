@@ -168,7 +168,7 @@ jobs:
       # "build-aarch64-apple-darwin",
     ]
     runs-on: ubuntu-24.04
-    if: startsWith(github.ref, 'refs/tags/')
+    # if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
       - name: Download All Artifacts
