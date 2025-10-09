@@ -170,11 +170,11 @@ jobs:
           path: v8-aarch64-apple-darwin.zip
   build:
     needs: [
-      "build-x86_64-unknown-linux-gnu",
-      "build-x86_64-pc-windows-msvc",
-      # "build-x86_64-apple-darwin",
-      # "build-aarch64-apple-darwin",
-    ]
+        "build-x86_64-unknown-linux-gnu",
+        "build-x86_64-pc-windows-msvc",
+        # "build-x86_64-apple-darwin",
+        # "build-aarch64-apple-darwin",
+      ]
     runs-on: ubuntu-latest
     # if: startsWith(github.ref, 'refs/tags/')
     steps:
@@ -201,12 +201,9 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     needs: ["build"]
     strategy:
+      fail-fast: false
       matrix:
-        os: [
-          ubuntu-latest,
-          windows-latest,
-          macos-latest,
-        ]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
